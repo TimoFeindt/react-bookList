@@ -1,7 +1,9 @@
-export default function BookShow() {
+
+
+export default function BookShow({title}) {
     return(
-        <div>
-            Ich bin Bookshow
+        <div className="bookBox">
+            <h3>{title}</h3>
         </div>
     )
 }
