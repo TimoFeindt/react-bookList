@@ -1,15 +1,14 @@
 import BookShow from "./BookShow";
 
-export default function BookList({bookList}) {
+export default function BookList({ books, onDelete }) {
 
 
-    const renderBookList = bookList.map((book) => {
-        return <BookShow title={book.title} key={book.id}/>  
+    const renderBookList = books.map((book) => {
+        return <BookShow book={book} key={book.id} onDelete={onDelete} />  
     })
 
     return(
-        <div className="list">
-            Ich bin die BookList
+        <div className="book-list">
             {renderBookList}
         </div>
     )

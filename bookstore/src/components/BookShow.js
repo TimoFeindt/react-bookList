@@ -1,9 +1,13 @@
-
-
-export default function BookShow({title}) {
+export default function BookShow({book, onDelete}) {
+    const handleClick = () => {
+        onDelete(book.id)
+    }
     return(
-        <div className="bookBox">
-            <h3>{title}</h3>
+        <div className="book-show">
+            {book.title}
+            <div className="actions">
+                <button className="delete" onClick={handleClick}>Delete</button>
+            </div>
         </div>
     )
 }

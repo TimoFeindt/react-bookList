@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function CreateBook({addBooks, list}) {
+export default function CreateBook({addBooks, books}) {
 
     const [inputValue, setInputValue] = useState('');
     const [id, setId] = useState(0)
@@ -11,23 +11,22 @@ export default function CreateBook({addBooks, list}) {
     }
 
     const addToList = () => {
-            if(inputValue === '') {
+        if(inputValue === '') {
 
-            } else {
-                const newBook = {title: inputValue, id: id}
-                const updatedList = [
-                    ...list,
-                    newBook
-                ];
-                addBooks(updatedList);
-                setId(id + 1);
-            }
-    } 
+        } else {
+            const newBook = {title: inputValue, id: id}
+            const updatedList = [
+                ...books,
+                newBook
+            ];
+            addBooks(updatedList);
+            setId(id + 1);
+        }
+    }
 
     return(
         <div>
-            Ich in Create Book
-            <div>
+            <div className="book-create">
                 <label htmlFor="createBookName"></label>
                 <input name="createBookName" type="text" onChange={updateInputValue}/>
                 <button onClick={addToList}>Add to List</button>
