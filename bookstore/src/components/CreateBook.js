@@ -12,7 +12,7 @@ export default function CreateBook({addBooks, books}) {
 
     const addToList = () => {
         if(inputValue === '') {
-
+            return
         } else {
             const newBook = {title: inputValue, id: id}
             const updatedList = [

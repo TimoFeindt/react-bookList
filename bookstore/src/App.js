@@ -16,11 +16,22 @@ function App() {
       setBooks(updatedBooks)
   }
 
+  const changeBookById = (data) => {
+    const updatedBooks = books.map((book) => {
+      if(book.id === data.bookID) {
+        //book.title = data.newTitle
+        return {...book, title: data.newTitle} // ...book nimmt alle key - value pairs im Object und behält packt sie ins neue Object bis auf title. Der wird zu data.newTitle
+      }
+      return book
+    })
+    setBooks(updatedBooks)
+  }
+
   return (
     <div className="app">
-        <h1>Main Area</h1>
-        <CreateBook addBooks={setBooks} books={books} />
-        <BookList books={books} onDelete={deleteBookById} />
+      <h1>Reading List</h1>
+      <CreateBook addBooks={setBooks} books={books} />
+      <BookList books={books} onDelete={deleteBookById} changeTitle={changeBookById} />
     </div>
   );
 }
