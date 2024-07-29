@@ -1,26 +1,29 @@
 import { useState } from "react"
+import axios from "axios"
 
 export default function CreateBook({addBooks, books}) {
 
     const [inputValue, setInputValue] = useState('');
-    const [id, setId] = useState(0)
 
     const updateInputValue = (e) => {
         const value = e.target.value.trim()
         setInputValue(value)
     }
 
-    const addToList = () => {
+    const addToList = async () => {
         if(inputValue === '') {
             return
         } else {
-            const newBook = {title: inputValue, id: id}
+
+            const response = await axios.post('http://localhost:3001/books', {
+                title: inputValue
+            });
+                        
             const updatedList = [
                 ...books,
-                newBook
+                response.data
             ];
             addBooks(updatedList);
-            setId(id + 1);
         }
     }
 
