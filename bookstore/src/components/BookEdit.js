@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useState } from "react";
+import useBooksContext from "../hooks/use-books-context";
 
-export default function BookEdit({title, getNewTitle}) {
+export default function BookEdit({book, getNewTitle}) {
+    const { changeBookById } = useBooksContext()
 
-    const [newTitle, setNewtitle ] = useState(title)
+    const [newTitle, setNewtitle ] = useState(book.title)
 
     const handleValueChange = (e) => {
         const value = e.target.value.trim();
@@ -12,7 +14,9 @@ export default function BookEdit({title, getNewTitle}) {
     }
 
     const handleSaveClick = () =>{
-        getNewTitle(newTitle)
+        const bookData = { bookID: book.id, newTitle }
+        changeBookById(bookData)
+        getNewTitle(true)
     }
 
     return(

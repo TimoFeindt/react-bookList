@@ -1,13 +1,11 @@
 import BookShow from "./BookShow";
+import useBooksContext from "../hooks/use-books-context";
 
-export default function BookList({ books, onDelete, changeTitle }) {
-
-    const handleChangeTitle = (data) => {
-        changeTitle(data)
-    }
+export default function BookList() {
+    const { books } = useBooksContext();
 
     const renderBookList = books.map((book) => {
-        return <BookShow book={book} key={book.id} onDelete={onDelete} changeTitle={handleChangeTitle}/>  
+        return <BookShow book={book} key={book.id} />  
     })
 
     return(

@@ -1,20 +1,21 @@
 import { useState } from "react";
 import BookEdit from './BookEdit';
+import useBooksContext from "../hooks/use-books-context";
 
-export default function BookShow({book, onDelete, changeTitle}) {
+export default function BookShow({ book }) {
+    const { deleteBookById } = useBooksContext();
 
     const [showEdit, setShowEdit] = useState(false)
 
     const handleDeleteClick = () => {
-        onDelete(book.id)
+        deleteBookById(book.id)
     }
 
     const handleEditClick = () => {
         setShowEdit(!showEdit)
     }
 
-    const onTitleChange = (data) => {
-        changeTitle({newTitle: data, bookID: book.id })
+    const onTitleChange = () => {
         setShowEdit(!showEdit)
     }
 
@@ -23,7 +24,7 @@ export default function BookShow({book, onDelete, changeTitle}) {
             <img src={`https://picsum.photos/seed/${book.id}/300/200`} alt="books" />
             { 
             showEdit ? 
-                <BookEdit title={book.title} getNewTitle={onTitleChange}/>
+                <BookEdit book={book} getNewTitle={onTitleChange}/>
             : 
                 <h3>{book.title}</h3>
             }

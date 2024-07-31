@@ -1,7 +1,9 @@
 import { useState } from "react"
-import axios from "axios"
+import useBooksContext from "../hooks/use-books-context";
 
-export default function CreateBook({addBooks, books}) {
+export default function CreateBook() {
+
+    const { createBook } = useBooksContext();
 
     const [inputValue, setInputValue] = useState('');
 
@@ -10,21 +12,13 @@ export default function CreateBook({addBooks, books}) {
         setInputValue(value)
     }
 
-    const addToList = async () => {
+    const handleClick = () => {
         if(inputValue === '') {
             return
         } else {
-
-            const response = await axios.post('http://localhost:3001/books', {
-                title: inputValue
-            });
-                        
-            const updatedList = [
-                ...books,
-                response.data
-            ];
-            addBooks(updatedList);
+            createBook(inputValue)
         }
+        setInputValue('')
     }
 
     return(
@@ -32,7 +26,7 @@ export default function CreateBook({addBooks, books}) {
             <div className="book-create">
                 <label htmlFor="createBookName"></label>
                 <input name="createBookName" type="text" onChange={updateInputValue}/>
-                <button onClick={addToList}>Add to List</button>
+                <button onClick={handleClick}>Add to List</button>
             </div>
         </div>
     )
